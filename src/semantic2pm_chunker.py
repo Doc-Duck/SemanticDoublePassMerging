@@ -1,4 +1,3 @@
-import asyncio
 from scipy import spatial
 from nltk.tokenize import sent_tokenize
 from langdetect import detect, DetectorFactory
