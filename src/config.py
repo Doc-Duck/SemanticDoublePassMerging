@@ -1,0 +1,4 @@
+EMBED_BASE_URL = "http://192.168.1.86:8002"
+EMBED_API_KEY = "not-needed"
+EMBED_MODEL = "BAAI/bge-m3"
+EMBED_BATCH_SIZE = 8
