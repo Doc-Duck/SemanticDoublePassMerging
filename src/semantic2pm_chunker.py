@@ -91,7 +91,7 @@ class Semantic2PMSplitter:
             if len(first_chunk) >= max_chunk_length:
                 i += 1
                 continue
-            
+
             first_embed = await self.embedder.get_embedding_async(first_chunk)
             second_embed = await self.embedder.get_embedding_async(second_chunk)
 
@@ -103,7 +103,7 @@ class Semantic2PMSplitter:
                     chunks[i] = merged_chunk
                     chunks.pop(i + 1)
                     continue
-            
+
             if i + 2 <= len(chunks) - 1:
                 third_chunk = chunks[i + 2]
                 third_embed = await self.embedder.get_embedding_async(second_chunk)
@@ -131,12 +131,14 @@ class Semantic2PMSplitter:
     ) -> list[str]:
         language = self.detect_language(text)
         sentences = self.split_into_sentences(text, language)
+        print(f'Sentences: {len(sentences)}')
 
         fp_chunks = await self.first_pass(
             sentences, max_chunk_length, initial_threshold, appending_threshold
         )
+        print(f'First pass chunks: {len(fp_chunks)}')
         sp_chunks = await self.second_pass(
             fp_chunks, max_chunk_length, merging_threshold
         )
-
+        print(f'Second pass chunks: {len(sp_chunks)}')
         return sp_chunks

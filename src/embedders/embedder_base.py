@@ -32,7 +32,7 @@ class BaseEmbedder:
             model=self.model_name,
             input=[text],
         )
-        return response.data[0]
+        return response.data[0].embedding
 
     def get_batch_embeddings(self, texts: List[str]) -> List[List[float]]:
         response = self.client.embeddings.create(
